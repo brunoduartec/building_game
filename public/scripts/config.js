@@ -8,6 +8,65 @@ function getLevelConfig(){
                 200,100,
                 0,100
             ]
+        },
+        "room":{
+            "image": "room",
+            "polygon":[
+                0,0,
+                64,0,
+                64,64,
+                0,64
+            ]
+        },
+        "forum":{
+            "image": "forum",
+            "polygon":[
+                0,0,
+                250,0,
+                250,250,
+                0,250
+                
+            ]
+        },
+        "teouvir":{
+            "image": "teouvir",
+            "polygon":[
+                0,0,
+                250,0,
+                250,250,
+                0,250
+                
+            ]
+        },
+        "atividade":{
+            "image": "atividade",
+            "polygon":[
+                0,0,
+                250,0,
+                250,250,
+                0,250
+                
+            ]
+        },
+        "plenária":{
+            "image": "plenária",
+            "polygon":[
+                0,0,
+                250,0,
+                250,250,
+                0,250
+                
+            ]
+        },
+        "ajuda":{
+            "image": "ajuda",
+            "polygon":[
+                0,0,
+                250,0,
+                250,250,
+                0,250
+                
+            ]
         }
     }
     
@@ -16,8 +75,58 @@ function getLevelConfig(){
 
 function getWorldConfig(){
     return {
-        "maxRoomsByFloor": 3
+        "maxRoomsByFloor": 6
     }
+}
+
+function getCardsInfo(){
+    return [
+        {
+            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
+            "alias": "forum",
+            "type": "forum",
+            "position":{
+                "x": 400,
+                "y": 500
+            }
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
+            "alias": "teouvir",
+            "type": "teouvir",
+            "position":{
+                "x": 300,
+                "y": 100
+            }
+        },
+        {
+            "url": "/class",
+            "alias": "atividade",
+            "type": "atividade",
+            "position":{
+                "x": 500,
+                "y": 100
+            }
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
+            "alias": "plenária",
+            "type": "plenária",
+            "position":{
+                "x": 100,
+                "y": 400
+            }
+        },
+        {
+            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
+            "alias": "ajuda",
+            "type": "ajuda",
+            "position":{
+                "x": 100,
+                "y": 400
+            }
+        }
+    ]
 }
 
 
@@ -25,129 +134,65 @@ function getLevelInfo(){
     return [
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala1",
-            "type": "room1"
+            "alias": "1",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala2",
-            "type": "room1"
+            "alias": "2",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala3",
-            "type": "room1"
+            "alias": "3",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala4",
-            "type": "room1"
+            "alias": "4",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "5",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "6",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "7",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "8",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "9",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "10",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "11",
+            "type": "room"
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
+            "alias": "12",
+            "type": "room"
         },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        },
-        {
-            "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "sala5",
-            "type": "room1"
-        }
+       
 
     ]
 }
