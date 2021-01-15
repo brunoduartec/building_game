@@ -39,7 +39,6 @@ function preload ()
 }
 
 function placeRooms(parent, add, debugMode){
-    currentFloor = 0;
     roomHeight = 100;
     roomWidth = 100;
     offsetX = 256
@@ -75,7 +74,6 @@ function placeRooms(parent, add, debugMode){
         size = parseInt(itemInfo.alias)/10
 
         let text1 = add.text(it.x - (textOffsetX + size * textDeltaX), it.y - textDeltaY, itemInfo.alias, { font: "45px Arial Black" });
-        // text1.setStroke('#000', 16);
     }
 
 }
@@ -103,15 +101,7 @@ function create ()
 
     this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
-    let t= this.add.text(256, -700,"Salas", { font: "200px Arial Black" , fill: "#0F0" });
+    let t= this.add.text(window.innerWidth/2 - 400, -700,"Salas", { font: "200px Arial Black" , fill: "#0F0" });
 
-    let isDesktop = this.sys.game.device.os.desktop
-    if(isDesktop){
-        placeRooms(this, this.add, false)    
-    }
-    else{
-        placeInLine(this,this.add,false)
-    }
-
-
+    placeRooms(this, this.add, false)    
 }

@@ -37,7 +37,7 @@ function preload ()
 
 function placeCards(parent, add, debugMode){
     items.forEach(item => {
-        let itemConfig = itemsConfig[item.alias]
+        let itemConfig = itemsConfig[item.type]
         let config = {
             image: itemConfig.image,
             polygon: itemConfig.polygon,
@@ -54,12 +54,12 @@ function placeCardsAlongCircle(parent, add, debugMode){
     let teta = 0;
     let deltaTeta = (2*Math.PI) / items.length;
     let center = {
-        x: 450,
+        x: window.innerWidth/2,
         y: 380
     }
     let r = 250;
     items.forEach(item => {
-        let itemConfig = itemsConfig[item.alias]
+        let itemConfig = itemsConfig[item.type]
 
         console.log(teta, Math.cos(teta))
 
@@ -86,36 +86,8 @@ function placeCardsAlongCircle(parent, add, debugMode){
 }
 
 
-function placeInLine(parent, add, debugMode){
-    let deltaY = 300
-    let posY = 300
-    let posX = 300
-    items.forEach(item => {
-        let itemConfig = itemsConfig[item.alias]
-        let config = {
-            image: itemConfig.image,
-            polygon: itemConfig.polygon,
-            position: {
-                x:posX,
-                y:posY
-            },
-            url: item.url
-        }
-        let it = getItem(parent, item.alias, add, config, debugMode )
-
-        posY+=deltaY
-    });
-}
 
 function create ()
 {
-    let isDesktop = this.sys.game.device.os.desktop
-    if(isDesktop){
-        placeCardsAlongCircle(this, this.add, false)    
-    }
-    else{
-        placeInLine(this,this.add,false)
-        this.game.resize(window.innerWidth, 2000);
-    }
-
+    placeCardsAlongCircle(this, this.add, false)    
 }
