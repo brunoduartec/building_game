@@ -1,16 +1,10 @@
 
 var config = {
     type: Phaser.AUTO,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 200 }
-        }
-    },
     scale: {
         parent: "gameContainer",
-        width: 1024,
-        height: 768,
+        width: window.innerWidth,
+        height: window.innerHeight,
     },
     scene: {
         preload: preload,
@@ -34,6 +28,9 @@ function update (time, delta)
 
 function preload ()
 {
+    this.background = new Phaser.Display.Color(255, 255, 255);
+    this.cameras.main.setBackgroundColor(this.background);
+
     let itemsArrayValue = Object.values(itemsConfig)
     itemsArrayValue.forEach(config => {
         this.load.image(config.image,`../assets/${config.image}.png`);
@@ -86,8 +83,6 @@ function placeRooms(parent, add, debugMode){
 
 function create ()
 {
-    this.background = new Phaser.Display.Color(255, 255, 255);
-    this.cameras.main.setBackgroundColor(this.background);
 
     //  Set the camera bounds to be the size of the image
     this.cameras.main.setBounds(0,-1200-200, 800, 1200 + 300 );
@@ -109,6 +104,14 @@ function create ()
     this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
     let t= this.add.text(256, -700,"Salas", { font: "200px Arial Black" , fill: "#0F0" });
-    placeRooms(this, this.add, false)    
+
+    let isDesktop = this.sys.game.device.os.desktop
+    if(isDesktop){
+        placeRooms(this, this.add, false)    
+    }
+    else{
+        placeInLine(this,this.add,false)
+    }
+
 
 }
