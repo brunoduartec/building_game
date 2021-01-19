@@ -16,7 +16,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 var itemsConfig = getLevelConfig();
-var items = getLevelInfo();
+var items = getLevelInfoDocs();
 var worldConfig = getWorldConfig();
 
 
@@ -28,13 +28,14 @@ function update (time, delta)
 
 function preload ()
 {
+
     this.background = new Phaser.Display.Color(255, 255, 255);
     this.cameras.main.setBackgroundColor(this.background);
 
     let itemsArrayValue = Object.values(itemsConfig)
     itemsArrayValue.forEach(config => {
+        // console.log("=======", `https://brunoduartec.github.io/building_game/public/assets/${config.image}.png`)
         this.load.image(config.image,`../assets/${config.image}.png`);
-        
     });
 }
 

@@ -7,6 +7,4 @@ services:
         image: egm21
         ports:
             - "30100:3010"
-        volumes:
-            - .:/usr/app
         tty: true
