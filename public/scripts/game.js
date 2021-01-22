@@ -17,7 +17,8 @@ var config = {
 var game = new Phaser.Game(config);
 
 var itemsConfig = getLevelConfig();
-var items = getCardsInfo();
+var items = getLevelInfoDocs("frentes");
+
 
 function update (time, delta)
 {
@@ -36,8 +37,14 @@ function preload ()
 }
 
 function placeCards(parent, add, debugMode){
+    
+    console.log("*****************************VAI COLOCAR", itemsConfig)
+    
     items.forEach(item => {
+
+        console.log("-------ITEM-------", item)
         let itemConfig = itemsConfig[item.type]
+        console.log("=================",itemConfig)
         let config = {
             image: itemConfig.image,
             polygon: itemConfig.polygon,
@@ -45,7 +52,7 @@ function placeCards(parent, add, debugMode){
             url: item.url
         }
 
-        let it = getItem(parent, item.alias, add, config, debugMode )
+        let it = addItem(parent, item.alias, add, config, debugMode )
     });
 }
 
@@ -58,31 +65,35 @@ function placeCardsAlongCircle(parent, add, debugMode){
         y: 380
     }
     let r = 250;
-    items.forEach(item => {
-        let itemConfig = itemsConfig[item.type]
 
-        console.log(teta, Math.cos(teta))
+    for (let index = 0; index < items.length; index++) {
+        let itemInfo = items[index]
 
-        let x = r * Math.sin(teta) + center.x;
-        let y = r * Math.cos(teta) + center.y;
-        teta+=deltaTeta;
-
-
-        // console.log(x,y)
-
-        let config = {
-            image: itemConfig.image,
-            polygon: itemConfig.polygon,
-            position: {
-                x:x,
-                y:y
-            },
-            url: item.url
-        }
+        console.log("------A--------", itemInfo.type.trim())
+        console.log(itemInfo)
+        console.log(itemsConfig)
+        console.log( typeof itemsConfig)
+        console.log(itemsConfig[itemInfo.type.trim()])
 
 
-        let it = getItem(parent, item.alias, add, config, debugMode )
-    });
+
+            let itemConfig = itemsConfig[itemInfo.type.trim()]
+
+            let x = r * Math.sin(teta) + center.x;
+            let y = r * Math.cos(teta) + center.y;
+            teta+=deltaTeta;
+
+            let config = {
+                image: itemConfig.image,
+                polygon: itemConfig.polygon,
+                position: {
+                    x:x,
+                    y:y
+                },
+                url: itemInfo.url
+            }
+            let it = addItem(parent, itemInfo.alias, add, config, debugMode )
+    }
 }
 
 

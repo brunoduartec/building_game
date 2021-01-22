@@ -1,4 +1,4 @@
-function getItem(parent,alias, add, itemConfig,  debugMode=false){
+function addItem(parent,alias, add, itemConfig,  debugMode=false){
     item = add.image(itemConfig.position.x, itemConfig.position.y, itemConfig.image);
   
     item.alias = alias

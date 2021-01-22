@@ -16,7 +16,7 @@ var config = {
 var game = new Phaser.Game(config);
 
 var itemsConfig = getLevelConfig();
-var items = getLevelInfoDocs();
+var items = getLevelInfoDocs("atividades");
 var worldConfig = getWorldConfig();
 
 
@@ -28,13 +28,11 @@ function update (time, delta)
 
 function preload ()
 {
-
     this.background = new Phaser.Display.Color(255, 255, 255);
     this.cameras.main.setBackgroundColor(this.background);
 
     let itemsArrayValue = Object.values(itemsConfig)
     itemsArrayValue.forEach(config => {
-        // console.log("=======", `https://brunoduartec.github.io/building_game/public/assets/${config.image}.png`)
         this.load.image(config.image,`../assets/${config.image}.png`);
     });
 }
@@ -70,7 +68,7 @@ function placeRooms(parent, add, debugMode){
             url: itemInfo.url
         }
 
-        let it = getItem(parent, itemInfo.alias, add, config, debugMode)
+        let it = addItem(parent, itemInfo.alias, add, config, debugMode)
 
         size = parseInt(itemInfo.alias)/10
 
@@ -79,6 +77,24 @@ function placeRooms(parent, add, debugMode){
 
 }
 
+
+function placeBackButton(parent, add, debugMode){
+    let itemConfig = itemsConfig["back"]
+
+    let x = 100;
+    let y = - window.innerHeight/2;
+
+    let config = {
+        image: itemConfig.image,
+        polygon: itemConfig.polygon,
+        position: {
+            x:x,
+            y:y
+        },
+        url: "/"
+    }
+    let it = addItem(parent, "back", add, config, debugMode)
+}
 
 function create ()
 {
@@ -102,7 +118,8 @@ function create ()
 
     this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
-    let t= this.add.text(window.innerWidth/2 - 400, -700,"Salas", { font: "200px Arial Black" , fill: "#0F0" });
+    let t= this.add.text(window.innerWidth/2 - 400, -window.innerHeight/2 - 300,"Salas", { font: "200px Arial Black" , fill: "#0F0" });
 
-    placeRooms(this, this.add, false)    
+    placeRooms(this, this.add, false);
+    placeBackButton(this, this.add, false);
 }

@@ -1,14 +1,14 @@
 function getLevelConfig(){
     var itemsConfig ={
-        "room1":{
-            "image": "room2",
-            "polygon":[
-                0,0,
-                200,0,
-                200,100,
-                0,100
-            ]
-        },
+        // "room1":{
+        //     "image": "room2",
+        //     "polygon":[
+        //         0,0,
+        //         200,0,
+        //         200,100,
+        //         0,100
+        //     ]
+        // },
         "room":{
             "image": "room",
             "polygon":[
@@ -48,8 +48,8 @@ function getLevelConfig(){
                 
             ]
         },
-        "plenária":{
-            "image": "plenária",
+        "plenaria":{
+            "image": "plenaria",
             "polygon":[
                 0,0,
                 250,0,
@@ -66,6 +66,15 @@ function getLevelConfig(){
                 250,250,
                 0,250
                 
+            ]
+        },
+        "back":{
+            "image": "back",
+            "polygon": [
+                0,0,
+                100,0,
+                100,100,
+                0,100
             ]
         }
     }
@@ -110,8 +119,8 @@ function getCardsInfo(){
         },
         {
             "url": "https://www.youtube.com/watch?v=Oy_5LsOM4pg",
-            "alias": "plenária",
-            "type": "plenária",
+            "alias": "plenaria",
+            "type": "plenaria",
             "position":{
                 "x": 100,
                 "y": 400
