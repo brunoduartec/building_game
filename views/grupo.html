@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Use JavaScript to Change Text</h2>
+    <p>This example writes "Hello JavaScript!" into an HTML element with id="demo":</p>
+
+    <!-- <p id="demo"></p> -->
+
+    <a class="button" id="demo" href="http://">Link do grupo</a>
+
+
+
+    <script>
+        let links = [
+            "aaa",
+            "bbbb",
+            "cccc"
+        ]
+
+        function getLink() {
+            console.log("---B---")
+            document.getElementById("demo").onclick = function () {
+                let size = links.length;
+                let index = Math.floor(Math.random() * size); // returns a random integer from 0 to 9
+
+                this.href = links[index];
+                console.log(this.href);
+            };
+        }
+
+        getLink();
+    </script>
+
+</body>
+
+</html>

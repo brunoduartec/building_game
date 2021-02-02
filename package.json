@@ -4,8 +4,10 @@
   "description": "Interface para encontrar tarefas do egm21",
   "main": "server.js",
   "dependencies": {
+    "discord.js": "^11.6.4",
     "express": "^4.17.1",
-    "phaser": "^3.51.0"
+    "phaser": "^3.51.0",
+    "read-excel-file": "^5.0.0"
   },
   "devDependencies": {},
   "scripts": {
