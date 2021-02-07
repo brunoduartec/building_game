@@ -3,42 +3,40 @@ const botInfo = env.discord.bot
 
 class botHandler{
     constructor(){
-        this.handlers = {};
+        this.handlers = [];
     }
-    addHandler(word, handler){
-        this.handlers[word] = handler;
-        console.log(`Added handler ${word}`, this.handlers[word])
+    addHandler(handler){
+        this.handlers.push(handler);
+        console.log(`Added handler of type ${handler.getName()}`)
     }
 
     getHandlers(){
         return this.handlers;
     }
 
-    showKnowledge(message, keys){
+    showKnowledge(message){
         let messageToSend = "Eu sei falar sobre: \n";
 
-        keys.forEach(word => {
-            messageToSend+= `${word} \n`
+        this.handlers.forEach(handler => {
+            messageToSend+= `${handler.getName()} \n`
         });
         message.channel.send(messageToSend);
     }
 
-    handle(message){
-        const keys = Object.keys(this.handlers);
+    handle(data, client){
         let solved = false;
-        keys.every(word => {
-            if(message.content.includes(word)){
-                console.log(`Testando ${word}`)
-                if(this.handlers[word].check(message)){
-                    this.handlers[word].method(message);
-                    solved = true;
-                    return true;
-                }
-            }
-        });
 
-        if(!solved){
-            this.showKnowledge(message, keys);
+        for (let index = 0; index < this.handlers.length; index++) {
+            const handler = this.handlers[index];
+
+            let test = handler.check(data, client);
+            console.log(`---------Testando ${handler.getName()}: ${test}`)
+            if(test){
+                console.log("-----ENTROU AQUI-----")
+                handler.method(data);
+                solved = true;
+                break;
+            }
         }
 
     }

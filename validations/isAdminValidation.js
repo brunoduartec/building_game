@@ -1,14 +1,13 @@
-const Permission = require("../permission.js")
-const permission = new Permission();
 const Validation = require("./validation")
 
 class isAdminValidation extends Validation {
     check(data){
         let message = data
+        let role = message.guild.roles.cache.find(r => r.name === "Coordenação");
+        let hasRole = message.member.roles.cache.has(role.id);
 
-        console.log("Informacoes do usuario", message.author)
+        let validation = hasRole;
 
-        let validation = permission.checkPermission(message.author.id);
         console.log(`Validating: isAdminValidation: ${validation}`);
         return validation
     }

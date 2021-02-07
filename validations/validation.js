@@ -1,5 +1,5 @@
 class Validation{
-    check(data){}
+    check(data, client){}
 }
 
 module.exports = Validation

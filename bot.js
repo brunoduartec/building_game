@@ -1,8 +1,5 @@
 const Discord = require("discord.js");
 
-const Permission = require("./permission.js")
-const permission = new Permission();
-
 const MessageHandler = require("./handlers/messageHandler")
 const RoleHandler = require("./handlers/roleHandler")
 
@@ -12,6 +9,7 @@ const botHandler = new BotHandler();
 const client = new Discord.Client();
 
 const ValidationMachine = require("./validations/validationMachine")
+const validationMachine = new ValidationMachine();
 
 
 const env = require("./env.json")
@@ -22,35 +20,38 @@ const prefix = botInfo.prefix;
 
 client.on("ready", () => {
   console.log("I am ready!");
-  initHandlers();
   initValidations();
+  initHandlers();
 });
 
 function initHandlers(){
-  let a = new MessageHandler("Vou ver aqui se voce esta nesse grupo");
-  console.log(a.check({
-    "content": "banana"
-  }));
-
-  botHandler.addHandler("grupo", new MessageHandler("Vou ver aqui se voce esta nesse grupo"));
-  botHandler.addHandler("ping", new MessageHandler("pong"));
-  botHandler.addHandler("regra", new RoleHandler("Você está nos grupos: "));
+  botHandler.addHandler(new MessageHandler("grupo","Vou ver aqui se voce esta nesse grupo"));
+  botHandler.addHandler(new MessageHandler("ping","pong"));
+  botHandler.addHandler(new RoleHandler("regra","Vi aqui que você está na sala "));
 }
 
 function initValidations(){
-  const isABot = require("./validations/isABot");
+  const isNotABot = require("./validations/isNotABot");
   const isAdminValidation = require("./validations/isAdminValidation");
+  const isAtChannel = require("./validations/isAtChannel");
+  const containsWord = require("./validations/containsWord");
+  const hasRole = require("./validations/hasRole");
+  const notHasRole = require("./validations/notHasRole");
+  const wasMentioned = require("./validations/wasMentioned");
 
-  let validationMachine = new ValidationMachine();
-  
-  validationMachine.addValidation("isABot", isABot);
+  validationMachine.addValidation("isNotABot", isNotABot);
   validationMachine.addValidation("isAdminValidation", isAdminValidation);
+  validationMachine.addValidation("containsWord", containsWord);
+  validationMachine.addValidation("isAtChannel", isAtChannel);
+  validationMachine.addValidation("hasRole", hasRole);
+  validationMachine.addValidation("notHasRole", notHasRole);
+  validationMachine.addValidation("wasMentioned", wasMentioned);
 }
 
 
 client.on("message", (message) => {
-  console.log("-----Chegou mensagem ", message.content)
-    botHandler.handle(message);
+  console.log("-----Chegou mensagem ", message.content, client.user.id)
+  botHandler.handle(message, client);
 });
 
 client.login(botInfo.token);
