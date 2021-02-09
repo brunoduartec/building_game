@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+
+const discordBot = require("./bot")
+
 const env = require("./env.json")
 
 app.use(express.static("public"));
