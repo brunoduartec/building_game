@@ -19,6 +19,7 @@ class AlunosSalasModel{
 
         alunosFromXLS.forEach(aluno => {
             this.alunos[aluno["NOME"]] = {
+                "nome": aluno["NOME"],
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
@@ -30,6 +31,19 @@ class AlunosSalasModel{
     }
     getAlunoByName(name){
         return this.alunos[name];
+    }
+
+    findAlunoInAMessage(message){
+        let keys = Object.keys(this.alunos);
+        let filter = m => message.toLowerCase().includes(m.toString().toLowerCase());
+
+        let firstItemFinded = keys.find(filter);
+        if(firstItemFinded){
+            return this.alunos[firstItemFinded];
+        }
+        else{
+            return null;
+        }
     }
 
 }

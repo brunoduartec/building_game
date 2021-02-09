@@ -7,7 +7,6 @@ class botHandler{
     }
     addHandler(handler){
         this.handlers.push(handler);
-        console.log(`Added handler of type ${handler.getName()}`)
     }
 
     getHandlers(){
@@ -30,9 +29,7 @@ class botHandler{
             const handler = this.handlers[index];
 
             let test = handler.check(data, client);
-            console.log(`---------Testando ${handler.getName()}: ${test}`)
             if(test){
-                console.log("-----ENTROU AQUI-----")
                 handler.method(data);
                 solved = true;
                 break;

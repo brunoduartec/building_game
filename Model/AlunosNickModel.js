@@ -32,9 +32,6 @@ class AlunosNickModel{
 
         let item = response.data.split("\n");
         
-        console.log("---------READ AXIOS------", item)
-        console.log(`Items: ${item.length}`)
-
         for (let index = 1; index < item.length; index++) {
             let element = item[index];
             let itemParams = element.split(",");
@@ -43,8 +40,6 @@ class AlunosNickModel{
                 let nome = itemParams[1];
                 let nick = itemParams[2];
 
-                console.log("---ITEMS---",this.nicks);
-    
                 if(!this.nicks[nick]){
                     this.nicks[nick] = {
                         "nome": nome
@@ -53,9 +48,6 @@ class AlunosNickModel{
             }
         }
         this.nicksCache = this.nicks
-
-        console.log(this.nicks)
-    
         this.updating = false;
       
     }

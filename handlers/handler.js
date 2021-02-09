@@ -12,10 +12,8 @@ class Handler{
 
         for (let index = 0; index < this.validations.length; index++) {
             const validation = this.validations[index];
-            console.log("VALIDATION", validation)
     
             valid = validation.check(data, client);
-            console.log(`${validation}: ${valid}`)
             if(!valid){
                 valid = false;
                 break;

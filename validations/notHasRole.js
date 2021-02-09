@@ -17,15 +17,11 @@ class notHasRole extends Validation {
 
             if(hasRole)
             {
-                console.log("===================ACHOU ROLE==================", roleName);
                 validation = false;
                 break;
             }
         }
 
-        console.log(`Validating: notHasRole: ${validation}`);
-
-        console.log("============================NAO ACHOU ROLE=========================");
         return validation
     }
 }

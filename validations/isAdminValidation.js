@@ -8,7 +8,6 @@ class isAdminValidation extends Validation {
 
         let validation = hasRole;
 
-        console.log(`Validating: isAdminValidation: ${validation}`);
         return validation
     }
 }

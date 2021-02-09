@@ -17,7 +17,6 @@ class isAtChannel extends Validation {
                 break;
             }
         }
-        console.log(`Validating: isAtChannel: ${validation}`);
         return validation;
     }
 }

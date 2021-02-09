@@ -1,31 +1,22 @@
 class ValidationMachine{
     constructor(){
-
         const instance = this.constructor.instance;
         if(instance){
-            console.log("PEGOU SINGLETON")
             return instance;
         }
-
-        console.log("Inicializou singleton")
-
         this.validations = {}
         this.constructor.instance = this;
     }
 
     addValidation(validationName, validator){
+        console.log(validationName, validator)
         this.validations[validationName] = validator;
-
-        console.log(validationName, this.validations[validationName])
     }
-    getValidation(validationName, data){
+    getValidation(validationName, data1, data2){
         const classPointer = this.validations[validationName];
 
-        console.log(this.validations)
-
-        console.log("---TENTANDO PEGAR  ",validationName, data, classPointer)
         if(classPointer){
-            return new classPointer(data);
+            return new classPointer(data1, data2);
         }
         else return null;
     }

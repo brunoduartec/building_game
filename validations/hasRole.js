@@ -20,8 +20,6 @@ class hasRole extends Validation {
                 break;
             }
         }
-
-        console.log(`Validating: hasRole: ${validation}`);
         return validation
     }
 }
