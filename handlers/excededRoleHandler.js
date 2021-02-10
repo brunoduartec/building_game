@@ -22,7 +22,7 @@ class ExcededRoleHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
-            validationMachine.getValidation("isAdminValidation"),
+            // validationMachine.getValidation("isAdminValidation"),
             // validationMachine.getValidation("isAtChannel", ["testes"]),
             validationMachine.getValidation("notHasRole",alunoclasses),
             validationMachine.getValidation("triesEqualsTo", word,3),
