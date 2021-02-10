@@ -19,7 +19,7 @@ class AlunosSalasModel{
 
         alunosFromXLS.forEach(aluno => {
             this.alunos[aluno["NOME"]] = {
-                "nome": aluno["NOME"],
+                "nome": slugify(aluno["NOME"]),
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
@@ -33,9 +33,29 @@ class AlunosSalasModel{
         return this.alunos[name];
     }
 
+    slugify (str) {
+        var map = {
+            '-' : ' ',
+            '-' : '_',
+            'a' : 'á|à|ã|â|À|Á|Ã|Â',
+            'e' : 'é|è|ê|É|È|Ê',
+            'i' : 'í|ì|î|Í|Ì|Î',
+            'o' : 'ó|ò|ô|õ|Ó|Ò|Ô|Õ',
+            'u' : 'ú|ù|û|ü|Ú|Ù|Û|Ü',
+            'c' : 'ç|Ç',
+            'n' : 'ñ|Ñ'
+        };
+        
+        for (var pattern in map) {
+            str = str.replace(new RegExp(map[pattern], 'g'), pattern);
+        };
+    
+        return str;
+    };
+
     findAlunoInAMessage(message){
         let keys = Object.keys(this.alunos);
-        let filter = m => message.toLowerCase().includes(m.toString().toLowerCase());
+        let filter = m => message.trim().toLowerCase().includes(m.toString().trim().toLowerCase());
 
         let firstItemFinded = keys.find(filter);
         if(firstItemFinded){
