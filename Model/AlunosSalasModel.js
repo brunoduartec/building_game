@@ -19,7 +19,7 @@ class AlunosSalasModel{
 
         alunosFromXLS.forEach(aluno => {
             this.alunos[aluno["NOME"]] = {
-                "nome": this.slugify(aluno["NOME"]).trim(),
+                "nome": this.cleanup(aluno["NOME"]),
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
@@ -33,7 +33,7 @@ class AlunosSalasModel{
         return this.alunos[name];
     }
 
-    slugify (str) {
+    cleanup (str) {
         var map = {
             '-' : ' ',
             '-' : '_',
@@ -50,7 +50,7 @@ class AlunosSalasModel{
             str = str.replace(new RegExp(map[pattern], 'g'), pattern);
         };
     
-        return str;
+        return str.trim();
     };
 
     findAlunoInAMessage(message){
