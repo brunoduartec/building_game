@@ -18,10 +18,11 @@ const options = {
     bufferMaxEntries: 0
   }
 
-const connectWithRetry = () => {
+const connectWithRetry = (callback) => {
   console.log('MongoDB connection with retry')
   mongoose.connect(connection, options).then(()=>{
     console.log('MongoDB is connected')
+    callback();
   }).catch(err=>{
     console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
     setTimeout(connectWithRetry, 5000)

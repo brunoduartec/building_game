@@ -37,16 +37,6 @@ function initHandlers(){
   botHandler.addHandler(new answerRoleHandler("regra","Vi aqui que você está na sala "));
   botHandler.addHandler(new excededRoleHandler("regra", "Você pode procurar alguém do time Transmisão, eles são fera, vão te ajudar"));
   botHandler.addHandler(new teachMessageHandler("aprender", "Acabei de aprender, agora é só me mencionar e mandar ", botHandler));
-
-
-  const ResponseModel = require("./Model/ResponsesModel");
-  ResponseModel.find()
-  .then(responses => {
-    responses.forEach(r => {
-      botHandler.addHandler(new MessageHandler(r.word,r.response));
-    });
-  })
-
 }
 
 function initValidations(){
@@ -86,7 +76,19 @@ client.on("message", (message) => {
 
 client.login(botInfo.token);
 
+function addResponses(){
+  
+    const ResponseModel = require("./Model/ResponsesModel");
+    ResponseModel.find()
+    .then(responses => {
+      responses.forEach(r => {
+        botHandler.addHandler(new MessageHandler(r.word,r.response));
+      });
+    })
+
+}
+
 
 function dbConnect(){
-  connectDb()
+  connectDb(addResponses)
 }
