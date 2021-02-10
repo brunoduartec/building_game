@@ -28,9 +28,8 @@ class AnswerRoleHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
-            // validationMachine.getValidation("isAdminValidation"),
-            // validationMachine.getValidation("isAtChannel", ["testes"]),
             validationMachine.getValidation("notHasRole",alunoclasses),
+            validationMachine.getValidation("notHasRole",["Voluntário"]),
             validationMachine.getValidation("triesGreaterThan", word,0),
             validationMachine.getValidation("triesLesserThan", word,3),
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")
