@@ -19,7 +19,7 @@ class AlunosSalasModel{
 
         alunosFromXLS.forEach(aluno => {
             this.alunos[aluno["NOME"]] = {
-                "nome": slugify(aluno["NOME"]),
+                "nome": slugify(aluno["NOME"]).trim(),
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
@@ -55,7 +55,7 @@ class AlunosSalasModel{
 
     findAlunoInAMessage(message){
         let keys = Object.keys(this.alunos);
-        let filter = m => message.trim().toLowerCase().includes(m.toString().trim().toLowerCase());
+        let filter = m => message.toLowerCase().includes(m.toString().toLowerCase());
 
         let firstItemFinded = keys.find(filter);
         if(firstItemFinded){
