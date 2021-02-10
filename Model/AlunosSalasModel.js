@@ -19,7 +19,7 @@ class AlunosSalasModel{
 
         alunosFromXLS.forEach(aluno => {
             this.alunos[aluno["NOME"]] = {
-                "nome": slugify(aluno["NOME"]).trim(),
+                "nome": this.slugify(aluno["NOME"]).trim(),
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
