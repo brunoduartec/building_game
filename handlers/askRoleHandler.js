@@ -23,13 +23,31 @@ class AskRoleHandler extends Handler{
         this.validations = [
             validationMachine.getValidation("isNotABot"),
             validationMachine.getValidation("notHasRole",alunoclasses),
-            validationMachine.getValidation("notHasRole",["Voluntário"]),
+            validationMachine.getValidation("notHasRole",this.getNoRoles()),
             validationMachine.getValidation("triesLesserThan", word,1),
             validationMachine.getValidation("executionStatusDifferentThan", word, "answer")
         ]
 
         this.messageToSend = messageToSend
     }
+
+    getNoRoles(){
+        let noRoles = [];
+        
+        noRoles.push("Transmissão"),
+        noRoles.push("Só quero te Ouvir"),
+        noRoles.push("Artes"),
+        noRoles.push("Câmara de sustentação"),
+        noRoles.push("Engajamento"),
+        noRoles.push("Família"),
+        noRoles.push("Fórum dos Trabalhadores"),
+        noRoles.push("Envolvimento"),
+        noRoles.push("Integração"),
+        noRoles.push("Voluntários")
+        return noRoles;
+    }
+
+    
     getName(){
         return "AskRoleHandler"
     }

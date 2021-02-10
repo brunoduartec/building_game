@@ -9,9 +9,7 @@ class MessageHandler extends Handler{
         this.validations = [
             validationMachine.getValidation("containsWord", this.word),
             validationMachine.getValidation("isNotABot"),
-            // validationMachine.getValidation("isAtChannel", ["testes"]),
             validationMachine.getValidation("wasMentioned")
-            // validationMachine.getValidation("isAdminValidation")
         ]
         this.messageToSend = messageToSend;
     }
