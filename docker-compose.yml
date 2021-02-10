@@ -1,10 +1,41 @@
 version: "3"
 
 services:
+    # db:
+    #     image: 'mongo'
+    #     ports:
+    #     - '27017:27017'
+    #     volumes:
+    #     - ./data/db:/data/db
+    #     networks:
+    #         - egm21-network
     app:
         build: .
         command: npm start
         image: egm21
         ports:
             - "30100:3010"
+        depends_on:
+            - mongo
+        links:
+            - mongo
         tty: true
+        # networks:
+        #     - egm21-network
+
+    mongo:
+        image: mongo
+        volumes:
+            - ./data/db:/data/db
+        # networks:
+        #     - egm21-network
+    mongo-express:
+        image: mongo-express
+        environment:
+            - ME_CONFIG_MONGODB_SERVER=mongo
+            - ME_CONFIG_MONGODB_PORT=27017
+        depends_on:
+            - mongo
+        ports:
+          - "8080:8081"
+        restart: always

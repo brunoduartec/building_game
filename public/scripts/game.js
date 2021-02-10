@@ -44,7 +44,6 @@ function placeCards(parent, add, debugMode){
 
         console.log("-------ITEM-------", item)
         let itemConfig = itemsConfig[item.type]
-        console.log("=================",itemConfig)
         let config = {
             image: itemConfig.image,
             polygon: itemConfig.polygon,

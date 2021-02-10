@@ -7,7 +7,7 @@ class containsWord extends Validation {
     }
     check(data){
         let message = data
-        let validation = message.content.includes(this.wordToMatch);
+        let validation = message.content.toLowerCase().includes(this.wordToMatch);
         return validation;
     }
 }

@@ -14,11 +14,11 @@ class ScheduleModel{
             endsIn: end
         }
 
-        this.schedule[day].push(activityInfo)
+        this.schedule[day].push(activityInfo);
     }
 
     getActivityNow(){
-
+        
     }
 
     getFullchedule(){
