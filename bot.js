@@ -3,9 +3,12 @@ const connectDb = require("./connection");
 
 const MessageHandler = require("./handlers/messageHandler")
 const askRoleHandler = require("./handlers/askRoleHandler")
+const dontKnowHandler = require("./handlers/dontKnowHandler")
 const answerRoleHandler = require("./handlers/answerRoleHandler")
 const excededRoleHandler = require("./handlers/excededRoleHandler");
 const teachMessageHandler = require("./handlers/teachMessageHandler");
+const forgetMessageHandler = require("./handlers/forgetMessageHandler");
+const TrainingMessageHandler = require("./handlers/trainingMessageHandler");
 
 
 const BotHandler = require("./handlers/botHandler")
@@ -37,6 +40,9 @@ function initHandlers(){
   botHandler.addHandler(new answerRoleHandler("regra","Vi aqui que você está na sala "));
   botHandler.addHandler(new excededRoleHandler("regra", "Você pode procurar alguém do time Transmisão, eles são fera, vão te ajudar"));
   botHandler.addHandler(new teachMessageHandler("aprender", "Acabei de aprender, agora é só me mencionar e mandar ", botHandler));
+  botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
+  botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))
+  // botHandler.addHandler(new dontKnowHandler("dont", "Oi cara, pior que eu não sei"));
 }
 
 function initValidations(){
@@ -77,7 +83,6 @@ client.on("message", (message) => {
 client.login(botInfo.token);
 
 function addResponses(){
-  
     const ResponseModel = require("./Model/ResponsesModel");
     ResponseModel.find()
     .then(responses => {
@@ -85,7 +90,6 @@ function addResponses(){
         botHandler.addHandler(new MessageHandler(r.word,r.response));
       });
     })
-
 }
 
 

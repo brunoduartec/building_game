@@ -20,10 +20,11 @@ class ExcededRoleHandler extends Handler{
             currentLetter = String.fromCharCode(currentLetter.charCodeAt() + 1);
         }
 
+        let noRoles = alunoclasses.concat(this.getNoRoles())
+
         this.validations = [
             validationMachine.getValidation("isNotABot"),
-            validationMachine.getValidation("notHasRole",alunoclasses),
-            validationMachine.getValidation("notHasRole",this.getNoRoles()),
+            validationMachine.getValidation("notHasRole",noRoles),
             validationMachine.getValidation("triesEqualsTo", word,3),
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")
         ]

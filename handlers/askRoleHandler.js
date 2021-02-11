@@ -20,10 +20,11 @@ class AskRoleHandler extends Handler{
             currentLetter = String.fromCharCode(currentLetter.charCodeAt() + 1);
         }
 
+        let noRoles = alunoclasses.concat(this.getNoRoles())
+
         this.validations = [
             validationMachine.getValidation("isNotABot"),
-            validationMachine.getValidation("notHasRole",alunoclasses),
-            validationMachine.getValidation("notHasRole",this.getNoRoles()),
+            validationMachine.getValidation("notHasRole",noRoles),
             validationMachine.getValidation("triesLesserThan", word,1),
             validationMachine.getValidation("executionStatusDifferentThan", word, "answer")
         ]

@@ -10,9 +10,23 @@ class botHandler{
     addHandler(handler){
         this.handlers.push(handler);
     }
+    removeHandler(word){
+        let filter = m => m.word != word;
+        let handlers = this.handlers.filter(filter)
+        this.handlers = handlers;
+    }
 
     getHandlers(){
         return this.handlers;
+    }
+
+    getHandlerByWord(word){
+        let filter = m => m.word == word;
+        let handler = this.handlers.find(filter)
+        // console.log(this.handlers)
+        console.log("-----FIND----", word);
+        console.log(handler)
+        return handler
     }
 
     showKnowledge(message){

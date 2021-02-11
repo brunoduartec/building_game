@@ -13,14 +13,20 @@ class notHasRole extends Validation {
             let roleName = this.roleNames[index];
 
             let role = message.guild.roles.cache.find(r => r.name === roleName);
-            let hasRole = message.member.roles.cache.has(role.id)
-
-            if(hasRole)
-            {
-                validation = false;
-                break;
+            
+            if(role){
+                let hasRole = message.member.roles.cache.has(role.id)
+    
+                if(hasRole)
+                {
+                    console.log(roleName)
+                    validation = false;
+                    break;
+                }
             }
         }
+
+        console.log("--------",this.roleNames, validation)
 
         return validation
     }
