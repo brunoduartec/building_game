@@ -18,8 +18,10 @@ class AlunosSalasModel{
         let alunosFromXLS =XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
         alunosFromXLS.forEach(aluno => {
-            this.alunos[aluno["NOME"]] = {
-                "nome": this.cleanup(aluno["NOME"]),
+            let nome =this.cleanup(aluno["NOME"]);
+
+            this.alunos[nome] = {
+                "nome": nome,
                 "sala": aluno["SALA"],
                 "cracha":aluno["CRACHÁ"]
             }
@@ -55,13 +57,19 @@ class AlunosSalasModel{
 
     findAlunoInAMessage(message){
         let keys = Object.keys(this.alunos);
+
+        console.log("Testando aluno", message)
+
         let filter = m => message.toLowerCase().includes(m.toString().toLowerCase());
 
         let firstItemFinded = keys.find(filter);
+
         if(firstItemFinded){
             return this.alunos[firstItemFinded];
         }
         else{
+            console.log("Não achou aluno na mensagem", message)
+
             return null;
         }
     }
