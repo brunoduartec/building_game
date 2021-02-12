@@ -39,7 +39,7 @@ function initHandlers(){
   botHandler.addHandler(new MessageHandler("ping","pong"));
   botHandler.addHandler(new askRoleHandler("regra","Você pode digitar seu nome completo pra eu te procurar aqui por favor?"));
   botHandler.addHandler(new answerRoleHandler("regra","Vi aqui que você está na sala "));
-  botHandler.addHandler(new excededRoleHandler("regra", "Você pode procurar alguém do time Transmisão, eles são fera, vão te ajudar"));
+  botHandler.addHandler(new excededRoleHandler("regra", "Faz assim, manda uma mensagem lá no grupo estou-perdido que o pessoal da transmissão vai te ajudar."));
   botHandler.addHandler(new teachMessageHandler("aprender", "Acabei de aprender, agora é só me mencionar e mandar ", botHandler));
   botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
   botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))

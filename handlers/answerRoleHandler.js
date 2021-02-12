@@ -65,7 +65,7 @@ class AnswerRoleHandler extends Handler{
 
     _saveToDB(name, nick){
         const newQuestion = new ParticipanteModel({
-            name: nome,
+            name: name,
             nick: nick,
             helped: true,
             interacted: true
@@ -144,9 +144,18 @@ class AnswerRoleHandler extends Handler{
         else{
             handlerExecutionModel.incHandlerExecutionTries(this.word, message.author.id);
 
-            console.log("Tentativas----", handlerExecutionModel.getHandlerExecution(this.word, message.author.id).tries)
-            // handlerExecutionModel.updateHandlerExecutionStatus(this.word, message.author.id, "answer");
-            await message.channel.send("Você pode digitar seu nome completo pra eu te procurar aqui por favor?");
+            let handlerExecution = handlerExecutionModel.getHandlerExecution(this.word, message.author.id)
+
+            if(handlerExecution.tries == 1){
+                await message.channel.send("Você pode digitar seu nome completo pra eu te procurar aqui por favor?");
+            }
+            else{
+                await message.channel.send("Eu não te encontrei aqui ainda, vamos fazer o seguinte.");
+                await message.channel.send("Pode ser que você se inscreveu como trabalhador e aí eu não tenho a lista aqui");
+                await message.channel.send("Procura manda uma mensagem lá no estou-perdido que o pessoal da transmissão vai te ajudar");
+            }
+            console.log("Tentativas----", handlerExecution.tries)
+            handlerExecutionModel.updateHandlerExecutionStatus(this.word, message.author.id, "answer");
         }
     }
 
