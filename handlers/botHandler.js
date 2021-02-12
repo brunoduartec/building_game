@@ -4,10 +4,11 @@ const botInfo = env.discord.bot
 class botHandler{
     constructor(){
         this.handlers = [];
-        const DontKnowHandler = require("./dontKnowHandler");
-        this.dontKnowHandler = new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente");
     }
     addHandler(handler){
+        console.log("---------===============")
+        console.log(handler)
+        console.log("---------===============")
         this.handlers.push(handler);
     }
     removeHandler(word){
@@ -51,8 +52,11 @@ class botHandler{
     handle(data, client){
         let solved = false;
 
-        for (let index = 0; index < this.handlers.length; index++) {
-            const handler = this.handlers[index];
+        let validHandlers = this.handlers.filter(h=> h.word != "dont")
+        let dontKnow = this.getHandlerByWord("dont")
+
+        for (let index = 0; index < validHandlers.length; index++) {
+            const handler = validHandlers[index];
             solved = this.tryHandle(handler,data, client);
             if(solved)
             {
@@ -60,11 +64,12 @@ class botHandler{
             }
         }
 
-        // if(!solved){
-        //     console.log(this.dontKnowHandler)
-        //     this.tryHandle(this.dontKnowHandler,data, client)
-        //     return;
-        // }
+        if(!solved){
+            console.log("==============VAI RESOLVER O UNKNOWN===============")
+            // console.log(this.dontKnowHandler)
+            this.tryHandle(dontKnow,data, client)
+            return;
+        }
 
     }
 }

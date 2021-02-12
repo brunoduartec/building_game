@@ -36,6 +36,7 @@ class AlunosSalasModel{
     }
 
     cleanup (str) {
+        str = str.toLowerCase();
         var map = {
             '-' : ' ',
             '-' : '_',
@@ -60,7 +61,7 @@ class AlunosSalasModel{
 
         console.log("Testando aluno", message)
 
-        let filter = m => message.toLowerCase().includes(m.toString().toLowerCase());
+        let filter = m => this.cleanup(message).includes(m);
 
         let firstItemFinded = keys.find(filter);
 

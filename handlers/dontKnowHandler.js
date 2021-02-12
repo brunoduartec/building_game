@@ -4,15 +4,14 @@ const ValidationMachine = require("../validations/validationMachine");
 const validationMachine = new ValidationMachine();
 
 class DontKnowHandler extends Handler{
-    constructor(word, messageToSend){
+    constructor(word,messageToSend){
         super(word);
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
             validationMachine.getValidation("wasMentioned")
         ]
-
-        this.messageToSend = messageToSend
+        this.messageToSend = messageToSend;
     }
     
     getName(){

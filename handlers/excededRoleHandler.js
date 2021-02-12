@@ -3,6 +3,8 @@ const Handler = require("./handler")
 const HandlerExecutionsModel = require("../Model/HandlerExecutionsModel");
 const handlerExecutionModel = new HandlerExecutionsModel();
 
+const ParticipanteModel = require("../Model/ParticipanteModel");
+
 const ValidationMachine = require("../validations/validationMachine");
 const validationMachine = new ValidationMachine();
 
@@ -25,7 +27,7 @@ class ExcededRoleHandler extends Handler{
         this.validations = [
             validationMachine.getValidation("isNotABot"),
             validationMachine.getValidation("notHasRole",noRoles),
-            validationMachine.getValidation("triesEqualsTo", word,3),
+            validationMachine.getValidation("triesEqualsTo", word,2),
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")
         ]
         this.messageToSend = messageToSend;
@@ -47,6 +49,23 @@ class ExcededRoleHandler extends Handler{
         return noRoles;
     }
  
+    _saveToDB(nick){
+        const newQuestion = new AlunosModel({
+            name: "",
+            nick: nick,
+            helped: false,
+            interacted: true
+          });
+
+          newQuestion
+          .save()
+          .then(result => {
+            console.log(`Não ajudou-----: ${name}`)
+          })
+          .catch(error => {
+            console.log("Error---", error)
+          });
+    }
 
     getName(){
         return "ExcededRoleHandler"
@@ -59,6 +78,9 @@ class ExcededRoleHandler extends Handler{
         await message.channel.send(`Oi, <@${message.author.id}>`)
         await message.channel.send(this.messageToSend);
         handlerExecutionModel.removeHandlerExecution(this.word, message.author.id);
+
+        this._saveToDB(message.author.username)
+
     }
 }
 

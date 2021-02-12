@@ -3,8 +3,7 @@ const Handler = require("./handler")
 const AlunosSalasModel = require("../Model/AlunosSalasModel");
 const alunosSalasModel = new AlunosSalasModel();
 
-// const AlunosNickModel = require("../Model/AlunosNickModel");
-// const alunosNickModel = new AlunosNickModel();
+const ParticipanteModel = require("../Model/ParticipanteModel");
 
 const HandlerExecutionsModel = require("../Model/HandlerExecutionsModel");
 const handlerExecutionModel = new HandlerExecutionsModel();
@@ -32,7 +31,7 @@ class AnswerRoleHandler extends Handler{
             validationMachine.getValidation("isNotABot"),
             validationMachine.getValidation("notHasRole",noRoles),
             validationMachine.getValidation("triesGreaterThan", word,0),
-            validationMachine.getValidation("triesLesserThan", word,3),
+            validationMachine.getValidation("triesLesserThan", word,2),
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")
         ]
         this.messageToSend = messageToSend;
@@ -64,15 +63,34 @@ class AnswerRoleHandler extends Handler{
         return "AnswerRoleHandler"
     }
 
-    _giveRole(message, sala){
+    _saveToDB(name, nick){
+        const newQuestion = new ParticipanteModel({
+            name: nome,
+            nick: nick,
+            helped: true,
+            interacted: true
+          });
 
-        let roleName = `atividade-${sala.toLowerCase()}`
+          newQuestion
+          .save()
+          .then(result => {
+            console.log(`Ajudou-----: ${name}`)
+          })
+          .catch(error => {
+            console.log("Error---", error)
+          });
+    }
+
+    _giveRole(message, aluno){
+
+        let roleName = `atividade-${aluno.sala.toLowerCase()}`
         var alunoRole= message.guild.roles.cache.find(role => role.name === "Aluno");
         var role= message.guild.roles.cache.find(role => role.name === roleName);
 
         if(role){
             message.member.roles.add(alunoRole);
             message.member.roles.add(role);
+            this._saveToDB(aluno.nome, message.author.username);
             return true;
         }
         else{
@@ -106,7 +124,7 @@ class AnswerRoleHandler extends Handler{
 
     finalizeGiveRole(message, aluno){
         message.channel.send(`${this.messageToSend}: ${aluno.sala}` );
-        let hasAdded = this._giveRole(message, aluno.sala);
+        let hasAdded = this._giveRole(message, aluno);
 
         if(hasAdded){
             message.channel.send("Ela já deve ter aparecido ali à esquerda" );

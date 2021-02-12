@@ -3,12 +3,13 @@ const connectDb = require("./connection");
 
 const MessageHandler = require("./handlers/messageHandler")
 const askRoleHandler = require("./handlers/askRoleHandler")
-const dontKnowHandler = require("./handlers/dontKnowHandler")
 const answerRoleHandler = require("./handlers/answerRoleHandler")
 const excededRoleHandler = require("./handlers/excededRoleHandler");
 const teachMessageHandler = require("./handlers/teachMessageHandler");
 const forgetMessageHandler = require("./handlers/forgetMessageHandler");
 const TrainingMessageHandler = require("./handlers/trainingMessageHandler");
+const DontKnowHandler = require("./handlers/dontKnowHandler");
+
 
 
 const BotHandler = require("./handlers/botHandler")
@@ -42,7 +43,7 @@ function initHandlers(){
   botHandler.addHandler(new teachMessageHandler("aprender", "Acabei de aprender, agora é só me mencionar e mandar ", botHandler));
   botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
   botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))
-  // botHandler.addHandler(new dontKnowHandler("dont", "Oi cara, pior que eu não sei"));
+  botHandler.addHandler(new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente"))
 }
 
 function initValidations(){
@@ -59,7 +60,6 @@ function initValidations(){
   const executionStatusDifferentThan = require("./validations/executionStatusDifferentThan");
   const executionStatusEqualsTo = require("./validations/executionStatusEqualsTo")
 
-
   validationMachine.addValidation("isNotABot", isNotABot);
   validationMachine.addValidation("isAdminValidation", isAdminValidation);
   validationMachine.addValidation("containsWord", containsWord);
@@ -72,11 +72,12 @@ function initValidations(){
   validationMachine.addValidation("triesEqualsTo", triesEqualsTo);
   validationMachine.addValidation("executionStatusDifferentThan", executionStatusDifferentThan);
   validationMachine.addValidation("executionStatusEqualsTo", executionStatusEqualsTo);
+  
 }
 
 
 client.on("message", (message) => {
-  console.log("-----Chegou mensagem ", message.content)
+  console.log("-------------------Chegou mensagem------------------------ ", message.content, message.author)
   botHandler.handle(message, client);
 });
 
