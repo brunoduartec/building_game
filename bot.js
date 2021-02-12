@@ -9,6 +9,7 @@ const teachMessageHandler = require("./handlers/teachMessageHandler");
 const forgetMessageHandler = require("./handlers/forgetMessageHandler");
 const TrainingMessageHandler = require("./handlers/trainingMessageHandler");
 const DontKnowHandler = require("./handlers/dontKnowHandler");
+const sayHiHandler = require("./handlers/sayHiHandler");
 
 
 
@@ -44,6 +45,8 @@ function initHandlers(){
   botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
   botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))
   botHandler.addHandler(new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente"))
+  botHandler.addHandler(new sayHiHandler("hi", "Olá, que bom ter você por aqui, se precisar de alguma coisa é só me citar que a gente conversa"))
+
 }
 
 function initValidations(){
