@@ -6,9 +6,6 @@ class botHandler{
         this.handlers = [];
     }
     addHandler(handler){
-        console.log("---------===============")
-        console.log(handler)
-        console.log("---------===============")
         this.handlers.push(handler);
     }
     removeHandler(word){
