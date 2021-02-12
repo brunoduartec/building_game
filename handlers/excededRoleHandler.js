@@ -50,7 +50,7 @@ class ExcededRoleHandler extends Handler{
     }
  
     _saveToDB(nick){
-        const newQuestion = new AlunosModel({
+        const newQuestion = new ParticipanteModel({
             name: "",
             nick: nick,
             helped: false,
