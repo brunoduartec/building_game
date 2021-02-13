@@ -11,6 +11,13 @@ class RoleManagement{
             this.alunoclasses.push(`atividade-${currentLetter}`);
             currentLetter = String.fromCharCode(currentLetter.charCodeAt() + 1);
         }
+
+
+        this.forumclasses = []
+
+        for (let index = 0; index < 8; index++) {
+            this.forumclasses.push(`forum-${index}`)
+        }
     }
 
     _saveToDB(name, nick){
@@ -73,6 +80,10 @@ class RoleManagement{
 
     getStudentsRoles(){
         return this.alunoclasses;
+    }
+
+    getForumRoles(){
+        return this.forumclasses;
     }
 }
 
