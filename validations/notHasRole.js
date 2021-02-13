@@ -26,8 +26,6 @@ class notHasRole extends Validation {
             }
         }
 
-        console.log("--------",this.roleNames, validation)
-
         return validation
     }
 }

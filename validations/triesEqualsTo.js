@@ -17,9 +17,7 @@ class triesEqualsTo extends Validation {
 
         
         let handlerExecution = this.handlerExecutions.getHandlerExecution(this.handleName, userID);
-        console.log("--------CHECANDO IGUAL-----")
         if(handlerExecution){
-            console.log(handlerExecution.tries)
             validation = handlerExecution.tries == this.amounts;
         }
         else{

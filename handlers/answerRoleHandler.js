@@ -3,10 +3,11 @@ const Handler = require("./handler")
 const AlunosSalasModel = require("../Model/AlunosSalasModel");
 const alunosSalasModel = new AlunosSalasModel();
 
-const ParticipanteModel = require("../Model/ParticipanteModel");
-
 const HandlerExecutionsModel = require("../Model/HandlerExecutionsModel");
 const handlerExecutionModel = new HandlerExecutionsModel();
+
+const RoleManagement = require("../roleManagement")
+const roleManagement = new RoleManagement();
 
 const ValidationMachine = require("../validations/validationMachine");
 const validationMachine = new ValidationMachine();
@@ -14,18 +15,9 @@ const validationMachine = new ValidationMachine();
 class AnswerRoleHandler extends Handler{
     constructor(word, messageToSend){
         super(word);
-        
 
-        let alunoclasses = [];
-
-        let currentLetter = "a"
-        
-        for (let index = 0; index < 25; index++) {
-            alunoclasses.push(`atividade-${currentLetter}`);
-            currentLetter = String.fromCharCode(currentLetter.charCodeAt() + 1);
-        }
-
-        let noRoles = alunoclasses.concat(this.getNoRoles())
+        let alunoclasses = roleManagement.getStudentsRoles();
+        let noRoles = alunoclasses.concat(roleManagement.getWorkersRoles())
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
@@ -35,86 +27,15 @@ class AnswerRoleHandler extends Handler{
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")
         ]
         this.messageToSend = messageToSend;
-         this.init();   
-    }
-
-    getNoRoles(){
-        let noRoles = [];
-        
-        noRoles.push("Transmissão"),
-        noRoles.push("Só quero te Ouvir"),
-        noRoles.push("Artes"),
-        noRoles.push("Câmara de sustentação"),
-        noRoles.push("Engajamento"),
-        noRoles.push("Família"),
-        noRoles.push("Fórum dos Trabalhadores"),
-        noRoles.push("Envolvimento"),
-        noRoles.push("Integração"),
-        noRoles.push("Voluntários")
-        return noRoles;
+        this.init(); 
     }
 
     async init(){
         await alunosSalasModel.loadInfo();
-        // await alunosNickModel.loadAlunos();
     }
 
     getName(){
         return "AnswerRoleHandler"
-    }
-
-    _saveToDB(name, nick){
-        const newQuestion = new ParticipanteModel({
-            name: name,
-            nick: nick,
-            helped: true,
-            interacted: true
-          });
-
-          newQuestion
-          .save()
-          .then(result => {
-            console.log(`Ajudou-----: ${name}`)
-          })
-          .catch(error => {
-            console.log("Error---", error)
-          });
-    }
-
-    _giveRole(message, aluno){
-
-        let roleName = `atividade-${aluno.sala.toLowerCase()}`
-        var alunoRole= message.guild.roles.cache.find(role => role.name === "Aluno");
-        var role= message.guild.roles.cache.find(role => role.name === roleName);
-
-        if(role){
-            message.member.roles.add(alunoRole);
-            message.member.roles.add(role);
-            this._saveToDB(aluno.nome, message.author.username);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    getAlunosInfo(nick){
-        let alunoNick = alunosNickModel.getNameByNick(nick);
-        if(alunoNick){
-            let name = alunoNick.nome;
-            let alunoSalaInfo = alunosSalasModel.getAlunoByName(name)
-            
-            let aluno = {
-                "nome": name,
-                "sala": alunoSalaInfo.sala,
-                "crachá": alunoSalaInfo.cracha
-            }
-    
-            return aluno;
-        }
-        else{
-            return null;
-        }
     }
 
     getAlunoInfoByMessage(message){
@@ -124,7 +45,9 @@ class AnswerRoleHandler extends Handler{
 
     finalizeGiveRole(message, aluno){
         message.channel.send(`${this.messageToSend}: ${aluno.sala}` );
-        let hasAdded = this._giveRole(message, aluno);
+
+        let roleName = `atividade-${aluno.sala.toLowerCase()}`
+        let hasAdded = roleManagement.giveRole(message, aluno.nome, roleName, true)
 
         if(hasAdded){
             message.channel.send("Ela já deve ter aparecido ali à esquerda" );
@@ -154,14 +77,11 @@ class AnswerRoleHandler extends Handler{
                 await message.channel.send("Pode ser que você se inscreveu como trabalhador e aí eu não tenho a lista aqui");
                 await message.channel.send("Procura manda uma mensagem lá no estou-perdido que o pessoal da transmissão vai te ajudar");
             }
-            console.log("Tentativas----", handlerExecution.tries)
             handlerExecutionModel.updateHandlerExecutionStatus(this.word, message.author.id, "answer");
         }
     }
 
     async method(data){
-
-        console.log("----ANSWER----")
         const message = data;
         await message.channel.send(`Oi, <@${message.author.id}>`)
         

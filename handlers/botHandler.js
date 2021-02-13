@@ -21,9 +21,6 @@ class botHandler{
     getHandlerByWord(word){
         let filter = m => m.word == word;
         let handler = this.handlers.find(filter)
-        // console.log(this.handlers)
-        console.log("-----FIND----", word);
-        console.log(handler)
         return handler
     }
 

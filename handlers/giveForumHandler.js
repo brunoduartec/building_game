@@ -12,7 +12,10 @@ const alunosNickModel = new AlunosNickModel();
 const AlunosSalasModel = require("../Model/AlunosSalasModel");
 const alunosSalasModel = new AlunosSalasModel();
 
-class AskRoleHandler extends Handler{
+const RoleManagement = require("../roleManagement")
+const roleManagement = require
+
+class GiveForumHandle extends Handler{
     constructor(word, messageToSend){
         super(word);
 
@@ -29,7 +32,7 @@ class AskRoleHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
-            validationMachine.getValidation("notHasRole",noRoles),
+            validationMachine.getValidation("hasRole",noRoles),
             validationMachine.getValidation("triesLesserThan", word,1),
             validationMachine.getValidation("executionStatusDifferentThan", word, "answer")
         ]
@@ -40,7 +43,6 @@ class AskRoleHandler extends Handler{
 
     async init(){
         await alunosNickModel.loadAlunos();
-        await alunosSalasModel.loadInfo();
     }
 
     getNoRoles(){
@@ -61,7 +63,7 @@ class AskRoleHandler extends Handler{
 
     
     getName(){
-        return "AskRoleHandler"
+        return "GiveForumHandle"
     }
 
     _tryGiveRole(message){
@@ -69,18 +71,16 @@ class AskRoleHandler extends Handler{
         let name = alunosNickModel.getNameByNick(nick);
         let aluno = alunosSalasModel.getAlunoByName(name);
 
-        console.log("----------------------TENTANDO--------------------", aluno);
+        console.log("----------------------TENTANDO--------------------");
 
         if(aluno){
             console.log("----------ACHEI JA O NOME---------------")
             let roleName = `atividade-${aluno.sala.toLowerCase()}`
-            let hasAdded = roleManagement.giveRole(message,name, roleName, true);
+            let hasAdded = roleManagement.giveRole(message, roleName, true);
 
             if(hasAdded){
                 handlerExecutionModel.removeHandlerExecution(this.word, message.author.id);
                 return aluno;
-            }else{
-                return null;
             }
         }
         else{
@@ -109,5 +109,5 @@ class AskRoleHandler extends Handler{
     }
 }
 
-module.exports = AskRoleHandler
+module.exports = GiveForumHandle
 

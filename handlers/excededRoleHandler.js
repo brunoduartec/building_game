@@ -72,13 +72,10 @@ class ExcededRoleHandler extends Handler{
     }
 
     async method(data){
-
         console.log("----Excedeu----")
         const message = data;
         await message.channel.send(`Oi, <@${message.author.id}>`)
         await message.channel.send(this.messageToSend);
-        handlerExecutionModel.removeHandlerExecution(this.word, message.author.id);
-
         this._saveToDB(message.author.username)
 
     }

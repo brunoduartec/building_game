@@ -44,8 +44,9 @@ function initHandlers(){
   botHandler.addHandler(new teachMessageHandler("aprender", "Acabei de aprender, agora é só me mencionar e mandar ", botHandler));
   botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
   botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))
-  botHandler.addHandler(new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente"))
-  botHandler.addHandler(new sayHiHandler("hi", "Olá, que bom ter você por aqui, se precisar de alguma coisa é só me citar que a gente conversa"))
+  botHandler.addHandler(new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente"));
+
+  botHandler.addHandler(new sayHiHandler("hi", "Olá, que bom ter você por aqui, se precisar de alguma coisa é só me citar que a gente conversa"));
 
 }
 

@@ -27,7 +27,6 @@ class AlunosNickModel{
 
     async loadAlunosInfo(){
         this.updating = true;
-
         let response = await axios.get(alunosURL);
 
         let item = response.data.split("\n");
@@ -37,10 +36,19 @@ class AlunosNickModel{
             let itemParams = element.split(",");
 
             if(itemParams[0].length>0){
-                let nome = itemParams[1];
-                let nick = itemParams[2];
+                let nick = itemParams[3];
+                let nome = "";
 
-                if(!this.nicks[nick]){
+                for (let id = 5; id < 28; id++) {
+                    const it = itemParams[id];
+                    if(it){
+                        nome = it;
+                        break;
+                    }
+                    
+                }
+
+                if(!this.nicks[nick] && nome.length>0){
                     this.nicks[nick] = {
                         "nome": nome
                     }
@@ -80,6 +88,9 @@ class AlunosNickModel{
     }
     getNameByNick(nick){
         let nicks = this.getNicks();
+
+        console.log("------------------------------------------getNameByNick----------------------------------", nick, nicks[nick])
+
         return nicks[nick];
     }
     

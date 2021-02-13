@@ -16,7 +16,6 @@ class executionStatusDifferentThan extends Validation {
 
         let handlerExecution = this.handlerExecutions.getHandlerExecution(this.handleName, userID);
 
-        console.log("----DIFERENT-------", handlerExecution)
         if(handlerExecution){
             validation = handlerExecution.status != this.status;
         }
