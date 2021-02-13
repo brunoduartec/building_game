@@ -10,7 +10,8 @@ const forgetMessageHandler = require("./handlers/forgetMessageHandler");
 const TrainingMessageHandler = require("./handlers/trainingMessageHandler");
 const DontKnowHandler = require("./handlers/dontKnowHandler");
 const sayHiHandler = require("./handlers/sayHiHandler");
-
+const giveForumHandler = require("./handlers/giveForumHandler")
+const AnswerForumHandler = require("./handlers/answerForumHandler")
 
 
 const BotHandler = require("./handlers/botHandler")
@@ -45,8 +46,9 @@ function initHandlers(){
   botHandler.addHandler(new forgetMessageHandler("esquecer", "Acabei de esquecer", botHandler));
   botHandler.addHandler(new TrainingMessageHandler("treinar", "Beleza, vamos treinar então", botHandler))
   botHandler.addHandler(new DontKnowHandler("dont", "Vixi, eu não sei isso não, acho melhor perguntar pro seu dirigente"));
-
   botHandler.addHandler(new sayHiHandler("hi", "Olá, que bom ter você por aqui, se precisar de alguma coisa é só me citar que a gente conversa"));
+  botHandler.addHandler(new giveForumHandler("forum", "Você pode digitar seu nome completo pra eu te colocar na sua sala do forum por favor?"))
+  botHandler.addHandler(new AnswerForumHandler("forum", "Vi aqui que você está na sala"))
 
 }
 

@@ -17,13 +17,15 @@ class VoluntarioSalasModel{
         var sheet_name_list = workbook.SheetNames;
         let alunosFromXLS =XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
-        alunosFromXLS.forEach(aluno => {
-            let nome =this.cleanup(aluno["NOME"]);
+        alunosFromXLS.forEach(voluntario => {
+            let nome =this.cleanup(voluntario["NOME"]);
+
+            console.log("-------PEGO---------------",voluntario["FÓRUM"] )
 
             this.voluntarios[nome] = {
                 "nome": nome,
-                "sala": aluno["FÓRUM"],
-                "cracha":aluno["CRACHÁ"]
+                "sala": voluntario["FÓRUM"],
+                "cracha":voluntario["CRACHÁ"]
             }
         });
     }
@@ -31,7 +33,7 @@ class VoluntarioSalasModel{
     getAlunos(){
         return this.voluntarios;
     }
-    getAlunoByName(name){
+    getVoluntarioByName(name){
         return this.voluntarios[name];
     }
 
@@ -59,7 +61,7 @@ class VoluntarioSalasModel{
     findVoluntarioInAMessage(message){
         let keys = Object.keys(this.voluntarios);
 
-        console.log("Testando voluntario", message)
+        console.log("Testando voluntario===========================> ", message)
 
         let filter = m => this.cleanup(message).includes(m);
 
