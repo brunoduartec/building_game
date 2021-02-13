@@ -44,7 +44,7 @@ class AnswerForumHandler extends Handler{
         message.channel.send(`${this.messageToSend}: ${voluntario.sala}` );
 
         let roleName = `forum-${voluntario.sala}`
-        let hasAdded = roleManagement.giveRole(message, voluntario.nome, roleName, true)
+        let hasAdded = roleManagement.giveRole(message, voluntario.nome, roleName, false)
 
         if(hasAdded){
             message.channel.send("Ela já deve ter aparecido ali à esquerda" );
