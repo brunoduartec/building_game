@@ -29,6 +29,7 @@ class AskRoleHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
+            validationMachine.getValidation("isAtChannel", ["recepcao-egm-🙋"]),
             validationMachine.getValidation("notHasRole",noRoles),
             validationMachine.getValidation("triesLesserThan", word,1),
             validationMachine.getValidation("executionStatusDifferentThan", word, "answer")

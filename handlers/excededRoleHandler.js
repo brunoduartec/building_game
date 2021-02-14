@@ -26,6 +26,7 @@ class ExcededRoleHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
+            validationMachine.getValidation("isAtChannel", ["recepcao-egm-🙋"]),
             validationMachine.getValidation("notHasRole",noRoles),
             validationMachine.getValidation("triesEqualsTo", word,2),
             validationMachine.getValidation("executionStatusEqualsTo", word, "answer")

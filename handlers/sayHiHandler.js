@@ -13,6 +13,7 @@ class SayHiHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
+            validationMachine.getValidation("isAtChannel", ["recepcao-egm-🙋"]),
             validationMachine.getValidation("hasRole",this._getRoles()),
             validationMachine.getValidation("triesLesserThan", word,1)
         ]

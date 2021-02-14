@@ -60,7 +60,6 @@ class botHandler{
 
         if(!solved){
             console.log("==============VAI RESOLVER O UNKNOWN===============")
-            // console.log(this.dontKnowHandler)
             this.tryHandle(dontKnow,data, client)
             return;
         }

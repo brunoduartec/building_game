@@ -18,6 +18,7 @@ class AnswerForumHandler extends Handler{
 
         this.validations = [
             validationMachine.getValidation("isNotABot"),
+            validationMachine.getValidation("isAtChannel", ["recepcao-egm-🙋"]),
             validationMachine.getValidation("hasRole",roleManagement.getWorkersRoles()),
             validationMachine.getValidation("triesGreaterThan", word,0),
             validationMachine.getValidation("triesLesserThan", word,2),
