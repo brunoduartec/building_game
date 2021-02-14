@@ -20,9 +20,9 @@ class AlunosNickModel{
 
     async loadAlunos(){
         await this.loadAlunosInfo()
-        setInterval(()=>{
-            this.loadAlunosInfo.call(this)
-        }, refreshTime, 'refresh');
+        // setInterval(()=>{
+        //     this.loadAlunosInfo.call(this)
+        // }, refreshTime, 'refresh');
     }
 
     async loadAlunosInfo(){
