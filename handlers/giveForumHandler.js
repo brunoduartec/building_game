@@ -19,6 +19,7 @@ class GiveForumHandle extends Handler{
         this.validations = [
             validationMachine.getValidation("isNotABot"),
             validationMachine.getValidation("isAtChannel", ["recepcao-egm-🙋"]),
+            validationMachine.getValidation("containsWord", this.word),
             validationMachine.getValidation("hasRole",roleManagement.getWorkersRoles()),
             validationMachine.getValidation("notHasRole",roleManagement.getForumRoles()),
             validationMachine.getValidation("triesLesserThan", word,1),
