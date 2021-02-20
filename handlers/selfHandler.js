@@ -26,13 +26,15 @@ class SelfHandler extends Handler{
         let imageToAppend = "./public/assets/geraldinho.png"
         let pfp = user.avatarURL({format: 'png', dynamic: true, size: 512})
         let image = await Jimp.read(pfp);
+
+        console.log("------------IMAGE--------------")
+        console.log(image)
+
         image.composite((await Jimp.read(imageToAppend)).resize(512,512),0,0)
         let selfi = new Discord.MessageAttachment( await image.getBufferAsync(Jimp.MIME_PNG))
 
         message.channel.send(`Oi <@${message.author.id}>: ${this.messageToSend}`);
         message.reply(selfi)
-
-
     }
     getName(){
         return "SelfHandler"
